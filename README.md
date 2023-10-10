@@ -2,6 +2,6 @@
 
 Proyecto BEDU
 
-Integrantes:
-Daniel Jiménez
-Yasser Rosas
+### Integrantes:
+- Daniel Jiménez
+- Yasser Rosas
