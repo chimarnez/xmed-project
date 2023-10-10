@@ -19,7 +19,8 @@ exports.connect = async function () {
 
 exports.sync = async function () {
   try {
-    await sequelize.sync({ force: FORCE_DB_UPDATE === "yes" });
+    // TODO: add a env variable to force or not DB sync
+    await sequelize.sync({ force: false });
     console.log("> DB Updated");
   } catch (e) {
     console.error("> Cannot update DB");
