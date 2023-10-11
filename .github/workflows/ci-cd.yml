@@ -1,0 +1,30 @@
+name: Continous Integration/Continous Deployment
+
+# Con esta configuración se ejecuta en cada push a cualquier rama
+# on: [push]
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # Nombre del proceso a ejecutar
+  continuos-integration:
+    # El proceso va a ejecutarse en una instancia de ubuntu
+    runs-on: ubuntu-latest
+    # Pasos a ejecutar
+    steps:
+        # Clonar el código
+      - name: Clonar la última versión del código
+        uses: actions/checkout@v4
+
+        # Configurar el ambiente de Node.js
+      - name: Ejecutar las pruebas en un ambiente de Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+        
+        # Corre los comandos de Node.js para asegurar la integridad del código
+      - run: npm install
+        
