@@ -2,6 +2,8 @@
 
 Proyecto BEDU
 
-### Integrantes:
+### Integrantes
+
 - Daniel Jiménez
 - Yasser Rosas
+- Leonardo Cruz

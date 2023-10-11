@@ -1,18 +1,18 @@
-const { DataTypes } = require("sequelize");
-const { sequelize } = require("./sequelize");
+const { DataTypes } = require('sequelize')
+const { sequelize } = require('./sequelize')
 
-module.exports = sequelize.define("medical_records", {
+module.exports = sequelize.define('medical_records', {
   diagnosis: {
     type: DataTypes.TEXT,
-    allowNull: false,
+    allowNull: false
   },
   treatment: {
     type: DataTypes.TEXT,
-    allowNull: false,
+    allowNull: false
   },
   issuedOn: {
-    field: "issued_on",
+    field: 'issued_on',
     type: DataTypes.DATE,
-    allowNull: false,
-  },
-});
+    allowNull: false
+  }
+})
