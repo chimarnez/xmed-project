@@ -1,13 +1,14 @@
 const Joi = require('joi')
+const { createPatientSchema } = require('./patient')
 
-exports.createUserSchema = Joi.object({
+const createUserSchema = Joi.object({
   firstName: Joi.string()
-    .min(5)
+    .min(3)
     .max(50)
     .required(),
 
   lastName: Joi.string()
-    .min(5)
+    .min(3)
     .max(50)
     .required(),
 
@@ -21,7 +22,7 @@ exports.createUserSchema = Joi.object({
   phone: Joi.string()
     .min(7)
     .max(15)
-    .pattern(/(?:([+]\d{1,4})[-.\s]?)?(?:[(](\d{1,3})[)][-.\s]?)?(\d{1,4})[-.\s]?(\d{1,4})[-.\s]?(\d{1,9})/g)
+    .pattern(/(?:([+]\d{1,4})[-.\s]?)?(?:[(](\d{1,3})[)][-.\s]?)?(\d{1,4})[-.\s]?(\d{1,4})[-.\s]?(\d{1,9})/)
     .required(),
 
   address: Joi.string()
@@ -32,9 +33,13 @@ exports.createUserSchema = Joi.object({
     .required(),
 
   password: Joi.string()
-    .alphanum()
     .min(8)
     .max(50)
     .pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
     .required()
+})
+
+exports.createUserAndPatientSchema = Joi.object({
+  user: createUserSchema,
+  patient: createPatientSchema
 })
