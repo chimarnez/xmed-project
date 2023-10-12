@@ -16,8 +16,6 @@ exports.createPatientSchema = Joi.object({
     .required(),
 
   height: Joi.number()
-    .min(0.1)
-    .max(3)
     .required(),
 
   allergies: Joi.string()

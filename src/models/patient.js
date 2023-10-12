@@ -14,10 +14,7 @@ module.exports = sequelize.define('Patient', {
   bloodType: {
     field: 'blood_type',
     type: DataTypes.STRING(3),
-    allowNull: false,
-    validate: {
-      isIn: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
-    }
+    allowNull: false
   },
   weight: { // in kilograms
     type: DataTypes.FLOAT,
@@ -28,10 +25,7 @@ module.exports = sequelize.define('Patient', {
   },
   height: { // in meters
     type: DataTypes.FLOAT,
-    allowNull: false,
-    validate: {
-      len: [0.1, 3]
-    }
+    allowNull: false // TODO: validate if the height is minimum 0.1 and maximum 3 meters
   },
   allergies: {
     type: DataTypes.TEXT,

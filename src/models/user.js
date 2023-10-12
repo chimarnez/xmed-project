@@ -7,7 +7,7 @@ module.exports = sequelize.define('User', {
     type: DataTypes.STRING(50),
     allowNull: false,
     validate: {
-      len: [5, 50]
+      len: [3, 50]
     }
   },
   lastName: {
@@ -15,7 +15,7 @@ module.exports = sequelize.define('User', {
     type: DataTypes.STRING(50),
     allowNull: false,
     validate: {
-      len: [5, 50]
+      len: [3, 50]
     }
   },
   birthDate: {
