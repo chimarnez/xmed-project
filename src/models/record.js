@@ -1,7 +1,11 @@
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('./sequelize')
 
-module.exports = sequelize.define('medical_records', {
+module.exports = sequelize.define('Record', {
+  symptoms: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
   diagnosis: {
     type: DataTypes.TEXT,
     allowNull: false
