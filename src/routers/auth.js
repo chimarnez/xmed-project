@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const joiValidator = require('../middlewares/joiValidator')
+const joiValidator = require('../middlewares/validator')
 const { loginSchema } = require('../validations/auth')
 const { login } = require('../controllers/auth')
 
