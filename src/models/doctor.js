@@ -1,24 +1,21 @@
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('./sequelize')
 
-module.exports = sequelize.define('doctors', {
-  firstName: {
-    field: 'first_name',
-    type: DataTypes.STRING(100),
-    allowNull: false
-  },
-  lastName: {
-    field: 'last_name',
-    type: DataTypes.STRING(100),
-    allowNull: false
-  },
+module.exports = sequelize.define('Doctor', {
   specialization: {
-    type: DataTypes.STRING(255),
-    allowNull: false
+    type: DataTypes.STRING(100),
+    allowNull: false,
+    validate: {
+      len: [5, 100]
+    }
   },
   medicalLicense: {
     field: 'medical_license',
     type: DataTypes.STRING(100),
-    allowNull: false
+    allowNull: false,
+    validate: {
+      len: [5, 100]
+    },
+    unique: true
   }
 })

@@ -1,37 +1,51 @@
-const { DataTypes } = require('sequelize')
-const { sequelize } = require('./sequelize')
+const { DataTypes } = require("sequelize");
+const { sequelize } = require("./sequelize");
 
-module.exports = sequelize.define('patients', {
-  firstName: {
-    field: 'first_name',
+module.exports = sequelize.define("Patient", {
+  healthInsurance: {
+    field: "health_insurance",
     type: DataTypes.STRING(100),
-    allowNull: false
-  },
-  lastName: {
-    field: 'last_name',
-    type: DataTypes.STRING(100),
-    allowNull: false
-  },
-  gender: {
-    type: DataTypes.STRING(15),
-    allowNull: false
-  },
-  birthDate: {
-    field: 'birth_date',
-    type: DataTypes.DATE,
-    allowNull: false
-  },
-  phone: {
-    type: DataTypes.STRING(15),
-    allowNull: false
-  },
-  email: {
-    type: DataTypes.STRING(60),
+    // allowNull: false,
+    validate: {
+      len: [5, 100],
+    },
     unique: true,
-    allowNull: false
   },
-  address: {
-    type: DataTypes.STRING(255),
-    allowNull: false
-  }
-})
+  bloodType: {
+    field: "blood_type",
+    type: DataTypes.STRING(3),
+    // allowNull: false
+  },
+  weight: {
+    // in kilograms
+    type: DataTypes.FLOAT,
+    // allowNull: false,
+    validate: {
+      len: [0.1, 500],
+    },
+  },
+  height: {
+    // in meters
+    type: DataTypes.FLOAT, // TODO: validate if the height is minimum 0.1 and maximum 3 meters
+    // allowNull: false //
+  },
+  allergies: {
+    type: DataTypes.TEXT,
+    // allowNull: false
+  },
+  chronicDiseases: {
+    field: "chronic_diseases",
+    type: DataTypes.TEXT,
+    // allowNull: false
+  },
+  currentMedication: {
+    field: "current_medication",
+    type: DataTypes.TEXT,
+    // allowNull: false
+  },
+  familyHistory: {
+    field: "family_history",
+    type: DataTypes.TEXT,
+    // allowNull: false
+  },
+});

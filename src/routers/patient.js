@@ -10,11 +10,11 @@ const {
   deletePatient,
 } = require("../controllers/patient");
 
-router.post("/patients", getPatients);
+router.get("/patients", getPatients);
 
 router.get("/patients/:id", getPatient);
 
-router.get("/patients", createPatient);
+router.post("/patients", createPatient);
 
 router.put("/patients/:id", updatePatient);
 
