@@ -15,7 +15,7 @@ const validationEerror = require("./middlewares/validation-error");
 
 // Routes
 app.use("/users", userRouter);
-app.use(patientRouter);
+app.use("/patients", patientRouter);
 
 // Error handler
 app.use(validationEerror);

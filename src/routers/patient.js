@@ -10,14 +10,17 @@ const {
   deletePatient,
 } = require("../controllers/patient");
 
-router.get("/patients", getPatients);
+const validator = require("../middlewares/validator");
+const { patientSchema } = require("../validations/patient");
 
-router.get("/patients/:id", getPatient);
+router.get("/", getPatients);
 
-router.post("/patients", createPatient);
+router.get("/:id", getPatient);
 
-router.put("/patients/:id", updatePatient);
+router.post("/", validator.body(patientSchema), createPatient);
 
-router.delete("/patients/:id", deletePatient);
+router.put("/:id", validator.body(patientSchema), updatePatient);
+
+router.delete("/:id", deletePatient);
 
 module.exports = router;
