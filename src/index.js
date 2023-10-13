@@ -8,11 +8,13 @@ initDatabase()
 app.use(express.json())
 
 const userRouter = require('./routers/user')
+const authRouter = require('./routers/auth')
 
 const validationEerror = require('./middlewares/validation-error')
 
 // Routes
 app.use(userRouter)
+app.use('/auth', authRouter)
 
 // Error handler
 app.use(validationEerror)
