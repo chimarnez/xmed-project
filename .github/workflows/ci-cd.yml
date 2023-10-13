@@ -39,7 +39,7 @@ jobs:
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.USERNAME }}
+          username: ${{ secrets.SSH_USERNAME }}
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
