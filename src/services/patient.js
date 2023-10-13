@@ -13,7 +13,7 @@ exports.insert = function (data) {
 };
 
 exports.update = async function (id, data) {
-  await Patient.update(data, { where: id });
+  await Patient.update(data, { where: { id } });
 };
 
 exports.deleteById = async function (id) {

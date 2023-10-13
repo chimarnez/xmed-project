@@ -21,6 +21,7 @@ Doctor.belongsTo(User);
 //   },
 // });
 Patient.belongsTo(User, {
+  onDelete: "CASCADE",
   foreignKey: {
     allowNull: false,
   },
