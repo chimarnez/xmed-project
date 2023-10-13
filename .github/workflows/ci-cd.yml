@@ -1,4 +1,4 @@
-name: Continous Integration/Continous Deployment
+name: Continuous Integration/Continuous Deployment
 
 # Con esta configuración se ejecuta en cada push a cualquier rama
 # on: [push]
@@ -10,7 +10,7 @@ on:
 
 jobs:
   # Nombre del proceso a ejecutar
-  continuos-integration:
+  continuous-integration:
     # El proceso va a ejecutarse en una instancia de ubuntu
     runs-on: ubuntu-latest
     # Pasos a ejecutar
@@ -29,4 +29,21 @@ jobs:
       - run: npm install
         # Agregando comando para pruebas
       #- run: npm test
-        
+    
+  continuous-delivery:
+    needs: continuous-integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy on server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            cd /var/www/xmed-project/
+            git pull origin main
+            npm install --production
+            pm2 restart src/index.js
