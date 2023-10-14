@@ -23,4 +23,4 @@ passport.use(
   )
 )
 
-module.exports = passport
+module.exports = passport.authenticate('jwt', { session: false })
