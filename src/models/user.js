@@ -27,7 +27,7 @@ module.exports = sequelize.define('User', {
     type: DataTypes.CHAR(1),
     allowNull: false,
     validate: {
-      isIn: ['M', 'F', 'O'] // M - men, F - female, O - other
+      isIn: [['M', 'F', 'O']] // M - men, F - female, O - other
     }
   },
   phone: {

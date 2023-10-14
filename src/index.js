@@ -12,17 +12,24 @@ app.use('/api-docs',
   swaggerUi.serve,
   swaggerUi.setup(openApiConfig))
 
+// routers
 const userRouter = require('./routers/user')
+const doctorRouter = require('./routers/doctor')
+const patientRouter = require('./routers/patient')
+const recordRouter = require('./routers/record')
 const authRouter = require('./routers/auth')
 
-const validationEerror = require('./middlewares/validation-error')
+const validationError = require('./middlewares/validation-error')
 
 // Routes
-app.use(userRouter)
+app.use('/users', userRouter)
+app.use('/patients', patientRouter)
+app.use('/doctors', doctorRouter)
+app.use('/records', recordRouter)
 app.use('/auth', authRouter)
 
 // Error handler
-app.use(validationEerror)
+app.use(validationError)
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log(`> Listening in port :${process.env.SERVER_PORT}`)
