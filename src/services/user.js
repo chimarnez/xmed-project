@@ -1,7 +1,11 @@
 const User = require('../models/user')
+const { hash } = require('./security')
 
-exports.insert = function (data) {
-  return User.create(data)
+exports.insert = async function (data) {
+  data.password = await hash(data.password)
+  const user = await User.create(data)
+  delete user.dataValues.password
+  return user
 }
 
 exports.findByEmail = function (email) {
