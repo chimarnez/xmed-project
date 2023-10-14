@@ -21,6 +21,11 @@ exports.updateUser = async function (request, response) {
 }
 
 exports.getUser = async function (request, response) {
+  const user = await findById(request.user.id)
+  response.status(200).json(user)
+}
+
+exports.getUserById = async function (request, response) {
   const { id } = request.params
   const user = await findById(id)
   response.status(200).json(user)
