@@ -10,11 +10,11 @@ const {
 } = require("../controllers/doctor")
 
 
-router.post("/doctors", getDoctors);
+router.get("/doctors", getDoctors);
 
 router.get("/doctors/:id", getDdoctor);
 
-router.get("/doctors", createDoctor);
+router.post("/doctors", createDoctor);
 
 router.put("/doctors/:id", updateDoctor);
 
