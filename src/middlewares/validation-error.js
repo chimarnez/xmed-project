@@ -1,5 +1,9 @@
 function getErrors(details) {
-  return { errors: details.map((err) => err.message) };
+  const err = {};
+  for (let e of details) {
+    err[e.context.key] = e.message;
+  }
+  return { error: err };
 }
 
 module.exports = function (err, req, res, next) {

@@ -7,23 +7,23 @@ const Record = require("./models/record");
 // Relationships
 
 // A user can be a doctor
-User.hasOne(Doctor, {
+User.hasOne(Doctor);
+Doctor.belongsTo(User, {
+  onDelete: "CASCADE",
   foreignKey: {
-    allowNull: true,
+    allowNull: false,
+    unique: true,
   },
 });
-Doctor.belongsTo(User);
 
 // An user by default is a patient, this is why allowNull is false
-// User.hasOne(Patient, {
-//   foreignKey: {
-//     allowNull: true,
-//   },
-// });
+User.hasOne(Patient);
+
 Patient.belongsTo(User, {
   onDelete: "CASCADE",
   foreignKey: {
     allowNull: false,
+    unique: true,
   },
 });
 
