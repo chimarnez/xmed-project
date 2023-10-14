@@ -12,6 +12,7 @@ const userRouter = require('./routers/user')
 const doctorRouter = require('./routers/doctor')
 const patientRouter = require('./routers/patient')
 const recordRouter = require('./routers/record')
+const authRouter = require('./routers/auth')
 
 const validationError = require('./middlewares/validation-error')
 
@@ -20,6 +21,7 @@ app.use('/users', userRouter)
 app.use('/patients', patientRouter)
 app.use('/doctors', doctorRouter)
 app.use('/records', recordRouter)
+app.use('/auth', authRouter)
 
 // Error handler
 app.use(validationError)
