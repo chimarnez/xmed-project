@@ -24,7 +24,6 @@ const {
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: './xmed.db'
-
 })
 
 exports.sequelize = sequelize
@@ -41,6 +40,7 @@ exports.connect = async function () {
 
 exports.sync = async function () {
   try {
+    // await sequelize.sync({ force: true })
     await sequelize.sync({ force: FORCE_DB_UPDATE === 'yes' })
     console.log('> DB Updated')
   } catch (e) {

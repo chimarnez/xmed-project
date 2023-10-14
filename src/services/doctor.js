@@ -1,23 +1,22 @@
-const Doctor = require("../models/doctor");
+const Doctor = require('../models/doctor')
 
 exports.findAll = function () {
-  return Doctor.findAll();
-};
+  return Doctor.findAll()
+}
 
 exports.findById = function (id) {
-  return Doctor.findByPk(id);
-};
+  return Doctor.findByPk(id)
+}
 
 exports.insert = function (data) {
-  return Doctor.create(data);
-};
+  return Doctor.create(data)
+}
 
 exports.update = async function (id, data) {
-  await Doctor.update(data, { where: id });
-};
+  await Doctor.update(data, { where: id })
+}
 
 exports.deleteById = async function (id) {
-  const doctor = await Doctor.findByPk(id);
-  await doctor.destroy();
-};
-
+  const doctor = await Doctor.findByPk(id)
+  await doctor.destroy()
+}

@@ -31,7 +31,7 @@ exports.findById = async function (id) {
   })
 }
 
-exposrts.updateById = async function (id, data) {
+exports.updateById = async function (id, data) {
   await Record.update(data, {
     where: {
       id

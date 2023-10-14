@@ -3,6 +3,7 @@ const router = express.router()
 const validator = require('../middlewares/validator')
 const {
   createRecordSchema,
+  updateRecordSchema
 } = require('../validations/record')
 const {
   createRecord,
@@ -11,12 +12,12 @@ const {
   deleteRecord
 } = require('../controllers/record')
 
-router.post('/records', validator.body(createRecordSchema), createRecord)
+router.post('/', validator.body(createRecordSchema), createRecord)
 
-router.get('/records/:id', getRecord)
+router.get('/:id', getRecord)
 
-router.put('/records/:id', validator.body(createRecordSchema),updateRecord)
+router.put('/:id', validator.body(updateRecordSchema), updateRecord)
 
-router.delete('/records/:id', deleteRecord)
+router.delete('/:id', deleteRecord)
 
 module.exports = router

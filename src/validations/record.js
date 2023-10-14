@@ -1,15 +1,15 @@
 const Joi = require('joi')
+const { optional } = require('./validation')
 
-exports.createRecordSchema = Joi.object({
-  symptoms: Joi.string()
-    .required(),
+const schema = Joi.object({
+  symptoms: Joi.string().alter(optional),
 
-  diagnosis: Joi.string()
-    .required(),
+  diagnosis: Joi.string().alter(optional),
 
-  treatment: Joi.string()
-    .required(),
+  treatment: Joi.string().alter(optional),
 
-  issuedOn: Joi.date()
-    .required()
+  issuedOn: Joi.date().alter(optional)
 })
+
+exports.createRecordSchema = schema.tailor('post')
+exports.updateRecordSchema = schema.tailor('put')

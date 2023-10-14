@@ -1,19 +1,22 @@
 const Patient = require('../models/patient')
 
+exports.findAll = function () {
+  return Patient.findAll()
+}
+
+exports.findById = function (id) {
+  return Patient.findByPk(id)
+}
+
 exports.insert = function (data) {
   return Patient.create(data)
 }
 
-exports.findPatientById = function (id) {
-  // SELECT * FROM patients WHERE id = ?
-  return Patient.findByPk(id)
+exports.update = async function (id, data) {
+  await Patient.update(data, { where: { id } })
 }
 
-exports.findPatientByUserId = function (userId) {
-  // SELECT * FROM patients WHERE userId = ?
-  return Patient.findOne({
-    where: {
-      userId
-    }
-  })
+exports.deleteById = async function (id) {
+  const patient = await Patient.findByPk(id)
+  await patient.destroy()
 }

@@ -1,11 +1,4 @@
-const {
-  save,
-  findByDoctorId,
-  findByPatientId,
-  findById,
-  updateById,
-  deleteById,
-} = require('../services/record')
+const { save, findById, updateById, deleteById } = require('../services/record')
 
 exports.createRecord = async function (req, res) {
   const recordData = req.body

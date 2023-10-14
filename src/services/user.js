@@ -17,3 +17,16 @@ exports.findById = function (id) {
   // SELECT * FROM users WHERE id = ?
   return User.findByPk(id)
 }
+
+exports.findAll = function () {
+  return User.findAll()
+}
+
+exports.update = async function (id, data) {
+  await User.update(data, { where: { id } })
+}
+
+exports.deleteById = async function (id) {
+  const patient = await User.findByPk(id)
+  await patient.destroy()
+}
