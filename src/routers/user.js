@@ -3,6 +3,7 @@ const router = express.Router()
 const {
   createUser,
   getUser,
+  getUserById,
   getUsers,
   updateUser,
   deleteUser
@@ -13,8 +14,9 @@ const jwtValidator = require('../middlewares/jwt')
 const { createUserSchema, updateUserSchema } = require('../validations/user')
 
 router.post('/', validator.body(createUserSchema), createUser)
-router.get('/:id', getUser)
-router.get('/', getUsers)
+router.get('/profile', jwtValidator, getUser)
+router.get('/:id', jwtValidator, getUserById)
+router.get('/', jwtValidator, getUsers)
 router.put('/:id', jwtValidator, validator.body(updateUserSchema), updateUser)
 router.delete('/:id', jwtValidator, deleteUser)
 

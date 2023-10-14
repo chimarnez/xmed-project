@@ -11,16 +11,17 @@ const {
 } = require('../controllers/patient')
 
 const validator = require('../middlewares/validator')
+const jwtValidator = require('../middlewares/jwt')
 const { patientSchema } = require('../validations/patient')
 
-router.get('/', getPatients)
+router.get('/', jwtValidator, getPatients)
 
-router.get('/:id', getPatient)
+router.get('/:id', jwtValidator, getPatient)
 
-router.post('/', validator.body(patientSchema), createPatient)
+router.post('/', jwtValidator, validator.body(patientSchema), createPatient)
 
-router.put('/:id', validator.body(patientSchema), updatePatient)
+router.put('/:id', jwtValidator, validator.body(patientSchema), updatePatient)
 
-router.delete('/:id', deletePatient)
+router.delete('/:id', jwtValidator, deletePatient)
 
 module.exports = router
