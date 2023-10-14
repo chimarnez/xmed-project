@@ -1,19 +1,19 @@
-const { DataTypes } = require("sequelize");
-const { sequelize } = require("./sequelize");
+const { DataTypes } = require('sequelize')
+const { sequelize } = require('./sequelize')
 
-module.exports = sequelize.define("Patient", {
+module.exports = sequelize.define('Patient', {
   healthInsurance: {
-    field: "health_insurance",
+    field: 'health_insurance',
     type: DataTypes.STRING(100),
     // allowNull: false,
     validate: {
-      len: [5, 100],
+      len: [5, 100]
     },
-    unique: true,
+    unique: true
   },
   bloodType: {
-    field: "blood_type",
-    type: DataTypes.STRING(3),
+    field: 'blood_type',
+    type: DataTypes.STRING(3)
     // allowNull: false
   },
   weight: {
@@ -21,31 +21,31 @@ module.exports = sequelize.define("Patient", {
     type: DataTypes.FLOAT,
     // allowNull: false,
     validate: {
-      len: [0.1, 500],
-    },
+      len: [0.1, 500]
+    }
   },
   height: {
     // in meters
-    type: DataTypes.FLOAT, // TODO: validate if the height is minimum 0.1 and maximum 3 meters
+    type: DataTypes.FLOAT // TODO: validate if the height is minimum 0.1 and maximum 3 meters
     // allowNull: false //
   },
   allergies: {
-    type: DataTypes.TEXT,
+    type: DataTypes.TEXT
     // allowNull: false
   },
   chronicDiseases: {
-    field: "chronic_diseases",
-    type: DataTypes.TEXT,
+    field: 'chronic_diseases',
+    type: DataTypes.TEXT
     // allowNull: false
   },
   currentMedication: {
-    field: "current_medication",
-    type: DataTypes.TEXT,
+    field: 'current_medication',
+    type: DataTypes.TEXT
     // allowNull: false
   },
   familyHistory: {
-    field: "family_history",
-    type: DataTypes.TEXT,
+    field: 'family_history',
+    type: DataTypes.TEXT
     // allowNull: false
-  },
-});
+  }
+})

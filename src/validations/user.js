@@ -1,5 +1,5 @@
-const Joi = require("joi");
-const { optional } = require("./validation");
+const Joi = require('joi')
+const { optional } = require('./validation')
 
 // const { createPatientSchema } = require('./patient')
 
@@ -10,7 +10,7 @@ const schema = Joi.object({
 
   birthDate: Joi.date().alter(optional),
 
-  gender: Joi.string().valid("M", "F", "O").alter(optional),
+  gender: Joi.string().valid('M', 'F', 'O').alter(optional),
 
   phone: Joi.string()
     .min(7)
@@ -23,18 +23,18 @@ const schema = Joi.object({
   address: Joi.string().alter(optional),
 
   email: Joi.string()
-    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
     .alter(optional),
 
   password: Joi.string()
     .min(8)
     .max(50)
     .pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
-    .alter(optional),
-});
+    .alter(optional)
+})
 
-exports.createUserSchema = schema.tailor("post");
-exports.updateUserSchema = schema.tailor("put");
+exports.createUserSchema = schema.tailor('post')
+exports.updateUserSchema = schema.tailor('put')
 
 // exports.createUserAndPatientSchema = Joi.object({
 //   user: createUserSchema,

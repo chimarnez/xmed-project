@@ -1,4 +1,4 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize } = require('sequelize')
 
 const {
   // MYSQL_HOST,
@@ -6,8 +6,8 @@ const {
   // MYSQL_DATABASE,
   // MYSQL_USERNAME,
   // MYSQL_PASSWORD,
-  FORCE_DB_UPDATE,
-} = process.env;
+  FORCE_DB_UPDATE
+} = process.env
 
 // If you are using MySQL uncomment this code
 // and comment the sequelize instance below
@@ -22,29 +22,29 @@ const {
 }); */
 
 const sequelize = new Sequelize({
-  dialect: "sqlite",
-  storage: "./xmed.db",
-});
+  dialect: 'sqlite',
+  storage: './xmed.db'
+})
 
-exports.sequelize = sequelize;
+exports.sequelize = sequelize
 
 exports.connect = async function () {
   try {
-    await sequelize.authenticate();
-    console.log("> Connected to DB");
+    await sequelize.authenticate()
+    console.log('> Connected to DB')
   } catch (e) {
-    console.error("> Unable to connect DB");
-    console.error(e);
+    console.error('> Unable to connect DB')
+    console.error(e)
   }
-};
+}
 
 exports.sync = async function () {
   try {
-    await sequelize.sync({ force: true });
-    // await sequelize.sync({ force: FORCE_DB_UPDATE === 'yes' })
-    console.log("> DB Updated");
+    // await sequelize.sync({ force: true })
+    await sequelize.sync({ force: FORCE_DB_UPDATE === 'yes' })
+    console.log('> DB Updated')
   } catch (e) {
-    console.error("> Cannot update DB");
-    console.error(e);
+    console.error('> Cannot update DB')
+    console.error(e)
   }
-};
+}

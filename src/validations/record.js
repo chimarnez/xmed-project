@@ -1,5 +1,5 @@
-const Joi = require("joi");
-const { optional } = require("./validation");
+const Joi = require('joi')
+const { optional } = require('./validation')
 
 const schema = Joi.object({
   symptoms: Joi.string().alter(optional),
@@ -8,8 +8,8 @@ const schema = Joi.object({
 
   treatment: Joi.string().alter(optional),
 
-  issuedOn: Joi.date().alter(optional),
-});
+  issuedOn: Joi.date().alter(optional)
+})
 
-exports.createRecordSchema = schema.tailor("post");
-exports.updateRecordSchema = schema.tailor("put");
+exports.createRecordSchema = schema.tailor('post')
+exports.updateRecordSchema = schema.tailor('put')
