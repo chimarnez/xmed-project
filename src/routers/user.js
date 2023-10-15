@@ -10,14 +10,15 @@ const {
 } = require('../controllers/user')
 // const { createUserAndPatientSchema } = require("../validations/user");
 const validator = require('../middlewares/validator')
-const jwtValidator = require('../middlewares/jwt')
+const { jwtValidator } = require('../middlewares/jwt')
 const { createUserSchema, updateUserSchema } = require('../validations/user')
 
 router.post('/', validator.body(createUserSchema), createUser)
 router.get('/profile', jwtValidator, getUser)
-router.get('/:id', jwtValidator, getUserById)
+// 1. Should not return hashed password
+router.get('/', jwtValidator, getUserById)
 router.get('/', jwtValidator, getUsers)
-router.put('/:id', jwtValidator, validator.body(updateUserSchema), updateUser)
-router.delete('/:id', jwtValidator, deleteUser)
+router.put('/', jwtValidator, validator.body(updateUserSchema), updateUser)
+router.delete('/', jwtValidator, deleteUser)
 
 module.exports = router

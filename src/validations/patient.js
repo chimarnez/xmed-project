@@ -1,7 +1,7 @@
 const Joi = require('joi')
 
 exports.patientSchema = Joi.object({
-  UserId: Joi.alternatives([Joi.number(), Joi.string()]).required(),
+  // UserId: Joi.alternatives([Joi.number(), Joi.string()]).required(),
   healthInsurance: Joi.string().min(5).max(100).allow(null),
   bloodType: Joi.string()
     .valid('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-')

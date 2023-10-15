@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 const {
-  getPatients,
+  // getPatients,
   getPatient,
   createPatient,
   updatePatient,
@@ -11,17 +11,17 @@ const {
 } = require('../controllers/patient')
 
 const validator = require('../middlewares/validator')
-const jwtValidator = require('../middlewares/jwt')
 const { patientSchema } = require('../validations/patient')
+const { withPatient, withoutPatient } = require('../middlewares/patient')
 
-router.get('/', jwtValidator, getPatients)
+// router.get('/', jwtValidator, withPatient, getPatients)
 
-router.get('/:id', jwtValidator, getPatient)
+router.get('/', withPatient, getPatient)
 
-router.post('/', jwtValidator, validator.body(patientSchema), createPatient)
+router.post('/', withoutPatient, validator.body(patientSchema), createPatient)
 
-router.put('/:id', jwtValidator, validator.body(patientSchema), updatePatient)
+router.put('/', withPatient, validator.body(patientSchema), updatePatient)
 
-router.delete('/:id', jwtValidator, deletePatient)
+router.delete('/', withPatient, deletePatient)
 
 module.exports = router

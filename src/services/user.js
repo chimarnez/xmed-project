@@ -1,4 +1,6 @@
 const User = require('../models/user')
+const Patient = require('../models/patient')
+const Doctor = require('../models/doctor')
 const { hash } = require('./security')
 
 exports.insert = async function (data) {
@@ -20,6 +22,23 @@ exports.findByEmail = function (email) {
 exports.findById = function (id) {
   // SELECT * FROM users WHERE id = ?
   return User.findByPk(id)
+}
+
+exports.findByIdWithPatient = function (id) {
+  return User.findByPk(id, {
+    include: {
+      model: Patient,
+      attributes: ['id']
+    }
+  })
+}
+exports.findByIdWithDoctor = function (id) {
+  return User.findByPk(id, {
+    include: {
+      model: Doctor,
+      attributes: ['id']
+    }
+  })
 }
 
 exports.findAll = function () {

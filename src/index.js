@@ -8,9 +8,7 @@ const openApiConfig = require('./docs/swagger')
 initDatabase()
 
 app.use(express.json())
-app.use('/api-docs',
-  swaggerUi.serve,
-  swaggerUi.setup(openApiConfig))
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiConfig))
 
 // routers
 const userRouter = require('./routers/user')
@@ -20,15 +18,18 @@ const recordRouter = require('./routers/record')
 const authRouter = require('./routers/auth')
 
 const validationError = require('./middlewares/validation-error')
+const ressourceError = require('./middlewares/ressource-error')
+const { jwtValidatorPatient, jwtValidatorDoctor } = require('./middlewares/jwt')
 
 // Routes
 app.use('/users', userRouter)
-app.use('/patients', patientRouter)
-app.use('/doctors', doctorRouter)
+app.use('/patients', jwtValidatorPatient, patientRouter)
+app.use('/doctors', jwtValidatorDoctor, doctorRouter)
 app.use('/records', recordRouter)
 app.use('/auth', authRouter)
 
 // Error handler
+app.use(ressourceError)
 app.use(validationError)
 
 app.listen(process.env.SERVER_PORT, () => {

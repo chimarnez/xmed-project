@@ -14,7 +14,8 @@ exports.createUser = async function (request, response) {
 }
 
 exports.updateUser = async function (request, response) {
-  const { id } = request.params
+  // const { id } = request.params
+  const { id } = request.user
   const data = request.body
   await update(id, data)
   response.status(204).end()
@@ -26,8 +27,8 @@ exports.getUser = async function (request, response) {
 }
 
 exports.getUserById = async function (request, response) {
-  const { id } = request.params
-  const user = await findById(id)
+  // const { id } = request.params
+  const user = await findById(request.user.id)
   response.status(200).json(user)
 }
 
@@ -37,7 +38,9 @@ exports.getUsers = async function (request, response) {
 }
 
 exports.deleteUser = async function (request, response) {
-  const { id } = request.params
+  // const { id } = request.params
+  const { id } = request.user
+
   await deleteById(id)
   response.status(204).end()
 }
