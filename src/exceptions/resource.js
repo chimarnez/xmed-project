@@ -1,5 +1,5 @@
-class RessourceError extends Error {
-  err_type = 'RESSOURCE'
+class ResourceError extends Error {
+  err_type = 'RESOURCE'
   err_code = 400
   constructor(message, code) {
     super(message)
@@ -7,4 +7,4 @@ class RessourceError extends Error {
   }
 }
 
-exports.RessourceError = RessourceError
+exports.ResourceError = ResourceError

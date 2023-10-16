@@ -1,8 +1,8 @@
-const { RessourceError } = require('../exceptions/ressource')
+const { ResourceError } = require('../exceptions/resource')
 
 exports.withDoctor = async function (req, res, next) {
   try {
-    if (!req.user.Doctor) throw new RessourceError('Not authorized', 401)
+    if (!req.user.Doctor) throw new ResourceError('Not authorized', 401)
     next()
   } catch (error) {
     next(error)
@@ -11,7 +11,7 @@ exports.withDoctor = async function (req, res, next) {
 
 exports.withoutDoctor = async function (req, res, next) {
   try {
-    if (req.user.Doctor) throw new RessourceError('Doctor already exist', 407)
+    if (req.user.Doctor) throw new ResourceError('Doctor already exist', 407)
     next()
   } catch (error) {
     next(error)

@@ -18,7 +18,7 @@ const recordRouter = require('./routers/record')
 const authRouter = require('./routers/auth')
 
 const validationError = require('./middlewares/validation-error')
-const ressourceError = require('./middlewares/ressource-error')
+const resourceError = require('./middlewares/resource-error')
 const { jwtValidatorPatient, jwtValidatorDoctor } = require('./middlewares/jwt')
 
 // Routes
@@ -29,7 +29,7 @@ app.use('/records', recordRouter)
 app.use('/auth', authRouter)
 
 // Error handler
-app.use(ressourceError)
+app.use(resourceError)
 app.use(validationError)
 
 app.listen(process.env.SERVER_PORT, () => {
