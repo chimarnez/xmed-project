@@ -12,7 +12,7 @@ exports.getDoctors = async function (request, response) {
 }
 
 exports.getDoctor = async function (request, response) {
-  const { id } = request.params
+  const { id } = request.user.Doctor
   const doctor = await findById(id)
   response.status(200).json(doctor)
 }
@@ -20,20 +20,20 @@ exports.getDoctor = async function (request, response) {
 exports.createDoctor = async function (request, response) {
   // TODO : restructure data
   const data = request.body
-  const doctor = await insert(data)
+  const { id: UserId } = request.user
+  const doctor = await insert({ ...data, UserId })
   response.status(201).json(doctor)
 }
 
 exports.updateDoctor = async function (request, response) {
-  const { id } = request.params
-  // TODO : restructure data
+  const { id } = request.user.Doctor
   const data = request.body
   await update(id, data)
   response.status(204).end()
 }
 
 exports.deleteDoctor = async function (request, response) {
-  const { id } = request.params
+  const { id } = request.user.Doctor
   await deleteById(id)
   response.status(204).end()
 }

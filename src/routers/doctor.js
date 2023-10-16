@@ -2,37 +2,32 @@ const express = require('express')
 const router = express.Router()
 
 const {
-  getDoctors,
+  // getDoctors,
   getDoctor,
   createDoctor,
   updateDoctor,
   deleteDoctor
 } = require('../controllers/doctor')
 const validator = require('../middlewares/validator')
-const { jwtValidator } = require('../middlewares/jwt')
 const {
   createDoctorsSchema,
   updateDoctorsSchema
 } = require('../validations/doctor')
+const { withDoctor, withoutDoctor } = require('../middlewares/doctor')
 
-router.get('/', jwtValidator, getDoctors)
+// router.get('/', withDoctor, getDoctors)
 
-router.get('/:id', jwtValidator, getDoctor)
+router.get('/', withDoctor, getDoctor)
 
 router.post(
   '/',
-  jwtValidator,
+  withoutDoctor,
   validator.body(createDoctorsSchema),
   createDoctor
 )
 
-router.put(
-  '/:id',
-  jwtValidator,
-  validator.body(updateDoctorsSchema),
-  updateDoctor
-)
+router.put('/', withDoctor, validator.body(updateDoctorsSchema), updateDoctor)
 
-router.delete('/:id', jwtValidator, deleteDoctor)
+router.delete('/', withDoctor, deleteDoctor)
 
 module.exports = router
