@@ -2,6 +2,7 @@ const User = require('../models/user')
 const Patient = require('../models/patient')
 const Doctor = require('../models/doctor')
 const { hash } = require('./security')
+const { Op } = require('sequelize');
 
 exports.insert = async function (data) {
   data.password = await hash(data.password)
@@ -15,6 +16,20 @@ exports.findByEmail = function (email) {
   return User.findOne({
     where: {
       email
+    }
+  })
+}
+
+exports.findByEmailLike = function (email) {
+  console.log(email)
+  console.log(`${email}`)
+  // SELECT * FROM users WHERE email LIKE ?
+  return User.findOne({
+    where: {
+      email: {
+        // [Op.like]: `%${email}%`
+        [Op.like]: email
+      }
     }
   })
 }
