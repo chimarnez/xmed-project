@@ -1,8 +1,9 @@
 const { save, findById, updateById, deleteById } = require('../services/record')
 
 exports.createRecord = async function (req, res) {
+  const { id: DoctorId } = req.user.Doctor
   const recordData = req.body
-  const record = await save(recordData)
+  const record = await save({ ...recordData, DoctorId })
   return res.status(201).json(record)
 }
 

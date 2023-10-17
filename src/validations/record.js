@@ -8,7 +8,9 @@ const schema = Joi.object({
 
   treatment: Joi.string().alter(optional),
 
-  issuedOn: Joi.date().alter(optional)
+  issuedOn: Joi.date().alter(optional),
+
+  PatientId: Joi.number().alter(optional)
 })
 
 exports.createRecordSchema = schema.tailor('post')

@@ -28,7 +28,7 @@ const schema = Joi.object({
 
   password: Joi.string()
     .min(8)
-    .max(50)
+    .max(100)
     .pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
     .alter(optional)
 })
