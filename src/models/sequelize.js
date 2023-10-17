@@ -9,9 +9,6 @@ const {
   FORCE_DB_UPDATE
 } = process.env
 
-// If you are using MySQL uncomment this code
-// and comment the sequelize instance below
-
 const sequelize = new Sequelize({
   dialect: 'mysql',
   host: MYSQL_HOST,
@@ -20,11 +17,6 @@ const sequelize = new Sequelize({
   password: MYSQL_PASSWORD,
   database: MYSQL_DATABASE
 })
-
-/* const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: './xmed.db'
-}) */
 
 exports.sequelize = sequelize
 
@@ -40,7 +32,6 @@ exports.connect = async function () {
 
 exports.sync = async function () {
   try {
-    // await sequelize.sync({ force: true })
     await sequelize.sync({ force: FORCE_DB_UPDATE === 'yes' })
     console.log('> DB Updated')
   } catch (e) {

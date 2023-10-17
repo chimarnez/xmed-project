@@ -7,21 +7,6 @@ exports.createRecord = async function (req, res) {
   return res.status(201).json(record)
 }
 
-// TODO: Waiting for authentication to be implemented
-// exports.getRecords = async function (req, res) {
-//   const { id, role } = req.user
-
-//   if (role === 'doctor') {
-//     const records = await findByDoctorId(id)
-//   }
-
-//   if (role === 'patient') {
-//     const records = await findByPatientId(id)
-//   }
-
-//   return res.status(200).json(records)
-// }
-
 exports.getRecordById = async function (req, res) {
   const { id } = req.params
   const record = await findById(id)
