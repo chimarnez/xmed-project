@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const validator = require('../middlewares/validator')
-const { jwtValidator } = require('../middlewares/jwt')
+const { jwtValidator, jwtValidatorDoctor } = require('../middlewares/jwt')
 const {
   createRecordSchema,
   updateRecordSchema
@@ -13,7 +13,7 @@ const {
   deleteRecord
 } = require('../controllers/record')
 
-router.post('/', jwtValidator, validator.body(createRecordSchema), createRecord)
+router.post('/', jwtValidatorDoctor, validator.body(createRecordSchema), createRecord)
 
 router.get('/:id', jwtValidator, getRecord)
 
