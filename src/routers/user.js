@@ -11,8 +11,9 @@ const {
 const validator = require('../middlewares/validator')
 const { jwtValidator } = require('../middlewares/jwt')
 const { createUserSchema, updateUserSchema } = require('../validations/user')
+const { withUser } = require('../middlewares/user')
 
-router.post('/', validator.body(createUserSchema), createUser)
+router.post('/', withUser, validator.body(createUserSchema), createUser)
 router.get('/profile', jwtValidator, getUser)
 router.get('/', jwtValidator, getUserById)
 router.get('/', jwtValidator, getUsers)
