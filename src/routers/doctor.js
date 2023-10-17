@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 
 const {
-  // getDoctors,
   getDoctor,
   createDoctor,
   updateDoctor,
@@ -15,19 +14,14 @@ const {
 } = require('../validations/doctor')
 const { withDoctor, withoutDoctor } = require('../middlewares/doctor')
 
-// router.get('/', withDoctor, getDoctors)
-
 router.get('/', withDoctor, getDoctor)
-
 router.post(
   '/',
   withoutDoctor,
   validator.body(createDoctorsSchema),
   createDoctor
 )
-
-router.put('/', withDoctor, validator.body(updateDoctorsSchema), updateDoctor)
-
+router.patch('/', withDoctor, validator.body(updateDoctorsSchema), updateDoctor)
 router.delete('/', withDoctor, deleteDoctor)
 
 module.exports = router
