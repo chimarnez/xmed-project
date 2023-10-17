@@ -1,20 +1,19 @@
 const { ResourceError } = require('../exceptions/resource')
 
-const { findByEmail } = require('../services/user')
+const { findByEmail, findByEmailLike } = require('../services/user')
 
 
-exports.withUser = async function (req, res, next) {
-  const user = await findByEmail(req.body.email);
+exports.withUser = async function (req, res, next){
   try {
+    const user = await findByEmailLike(req.body.email);
     if (user) {
-      res.status(407).json({ error: 'User already exists' });
+      throw new ResourceError('User already exist', 407)
+      next()
+    }else{
+      next()
     }
   } catch (error) {
-    if (error instanceof ResourceError) {
-      console.log('Generic error:', error.err_code);
-      next(error);
-    } else {
-      next(error);
-    }
+    console.log('Generic error:', error.err_code);
+    next(error);
   }
 }
