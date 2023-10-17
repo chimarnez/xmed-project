@@ -19,13 +19,13 @@ const authRouter = require('./routers/auth')
 
 const validationError = require('./middlewares/validation-error')
 const resourceError = require('./middlewares/resource-error')
-const { jwtValidatorPatient, jwtValidatorDoctor } = require('./middlewares/jwt')
+const { jwtValidatorPatient, jwtValidatorDoctor, jwtValidator } = require('./middlewares/jwt')
 
 // Routes
 app.use('/users', userRouter)
 app.use('/patients', jwtValidatorPatient, patientRouter)
 app.use('/doctors', jwtValidatorDoctor, doctorRouter)
-app.use('/records', recordRouter)
+app.use('/records', jwtValidator, recordRouter)
 app.use('/auth', authRouter)
 
 // Error handler

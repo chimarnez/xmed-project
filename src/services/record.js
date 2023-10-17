@@ -5,19 +5,19 @@ exports.save = async function (data) {
 }
 
 // returns all records for a patient
-exports.findByPatientId = async function (patientId) {
+exports.findByPatientId = async function (PatientId) {
   return Record.findAll({
     where: {
-      patientId
+      PatientId
     }
   })
 }
 
 // returns all records for a doctor
-exports.findByDoctorId = async function (doctorId) {
+exports.findByDoctorId = async function (DoctorId) {
   return Record.findAll({
     where: {
-      doctorId
+      DoctorId
     }
   })
 }

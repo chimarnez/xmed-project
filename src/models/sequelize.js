@@ -1,30 +1,30 @@
 const { Sequelize } = require('sequelize')
 
 const {
-  // MYSQL_HOST,
-  // MYSQL_PORT,
-  // MYSQL_DATABASE,
-  // MYSQL_USERNAME,
-  // MYSQL_PASSWORD,
+  MYSQL_HOST,
+  MYSQL_PORT,
+  MYSQL_DATABASE,
+  MYSQL_USERNAME,
+  MYSQL_PASSWORD,
   FORCE_DB_UPDATE
 } = process.env
 
 // If you are using MySQL uncomment this code
 // and comment the sequelize instance below
 
-/* const sequelize = new Sequelize({
-  dialect: "mysql",
+const sequelize = new Sequelize({
+  dialect: 'mysql',
   host: MYSQL_HOST,
   port: MYSQL_PORT,
   username: MYSQL_USERNAME,
   password: MYSQL_PASSWORD,
-  database: MYSQL_DATABASE,
-}); */
+  database: MYSQL_DATABASE
+})
 
-const sequelize = new Sequelize({
+/* const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: './xmed.db'
-})
+}) */
 
 exports.sequelize = sequelize
 
