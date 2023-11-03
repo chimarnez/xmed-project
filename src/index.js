@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
 const swaggerUi = require('swagger-ui-express')
 const app = express()
 
@@ -8,6 +9,7 @@ const openApiConfig = require('./docs/swagger')
 initDatabase()
 
 app.use(express.json())
+app.use(cors())
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiConfig))
 
 // routers
@@ -19,7 +21,11 @@ const authRouter = require('./routers/auth')
 
 const validationError = require('./middlewares/validation-error')
 const resourceError = require('./middlewares/resource-error')
-const { jwtValidatorPatient, jwtValidatorDoctor, jwtValidator } = require('./middlewares/jwt')
+const {
+  jwtValidatorPatient,
+  jwtValidatorDoctor,
+  jwtValidator
+} = require('./middlewares/jwt')
 
 // Routes
 app.use('/users', userRouter)
