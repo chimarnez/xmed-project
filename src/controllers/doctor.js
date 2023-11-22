@@ -3,12 +3,23 @@ const {
   findById,
   insert,
   update,
-  deleteById
+  deleteById,
+  findByMedicalLicense,
+  findBySpecialization
 } = require('../services/doctor')
 
-exports.getDoctors = async function (request, response) {
-  const doctors = await findAll()
-  response.status(200).json(doctors)
+exports.getDoctors = async function (req, res) {
+  const { specialization, medicalLicense } = req.query
+  let doctors
+  if (medicalLicense) {
+    const doctor = await findByMedicalLicense(medicalLicense)
+    doctors = doctor ? [doctor] : []
+  } else if (specialization) {
+    doctors = await findBySpecialization(specialization)
+  } else {
+    doctors = await findAll()
+  }
+  res.json(doctors)
 }
 
 exports.getDoctor = async function (request, response) {
