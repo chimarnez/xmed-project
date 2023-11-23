@@ -5,7 +5,9 @@ const Doctor = require('../models/doctor')
 const User = require('../models/user')
 
 exports.findAll = function () {
-  return Doctor.findAll()
+  return Doctor.findAll({
+    include: [{ model: User, attributes: ['firstName', 'lastName', 'phone'] }]
+  })
 }
 
 exports.findByMedicalLicense = async function (medicalLicense) {
@@ -14,17 +16,21 @@ exports.findByMedicalLicense = async function (medicalLicense) {
       medicalLicense: medicalLicense
     },
     attributes: ['specialization', 'medicalLicense'],
-    include: [{
-      model: User,
-      attributes: ['firstName', 'lastName']
-    }]
+    include: [
+      {
+        model: User,
+        attributes: ['firstName', 'lastName']
+      }
+    ]
   })
-  return doctor ? {
-    firstName: doctor.User.firstName,
-    lastName: doctor.User.lastName,
-    specialization: doctor.specialization,
-    medicalLicense: doctor.medicalLicense
-  } : null
+  return doctor
+    ? {
+        firstName: doctor.User.firstName,
+        lastName: doctor.User.lastName,
+        specialization: doctor.specialization,
+        medicalLicense: doctor.medicalLicense
+      }
+    : null
 }
 
 exports.findBySpecialization = async function (specialization) {
@@ -35,12 +41,14 @@ exports.findBySpecialization = async function (specialization) {
       }
     },
     attributes: ['specialization', 'medicalLicense'],
-    include: [{
-      model: User,
-      attributes: ['firstName', 'lastName']
-    }]
+    include: [
+      {
+        model: User,
+        attributes: ['firstName', 'lastName']
+      }
+    ]
   })
-  return doctors.map(doctor => ({
+  return doctors.map((doctor) => ({
     firstName: doctor.User.firstName,
     lastName: doctor.User.lastName,
     specialization: doctor.specialization,
