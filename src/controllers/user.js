@@ -3,7 +3,8 @@ const {
   update,
   findById,
   findAll,
-  deleteById
+  deleteById,
+  findByIdWithDoctor
 } = require('../services/user')
 // const { insert: insertPatient } = require('../services/patient')
 
@@ -43,6 +44,14 @@ exports.deleteUser = async function (request, response) {
 
   await deleteById(id)
   response.status(204).end()
+}
+
+exports.getUserRole = async function (request, response) {
+  // const { id } = request.params
+  const { id } = request.user
+  const user = await findByIdWithDoctor(id)
+
+  response.status(200).json(user)
 }
 
 // exports.createUser = async function (req, res) {

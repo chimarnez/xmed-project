@@ -6,7 +6,8 @@ const {
   getUserById,
   getUsers,
   updateUser,
-  deleteUser
+  deleteUser,
+  getUserRole
 } = require('../controllers/user')
 const validator = require('../middlewares/validator')
 const { jwtValidator } = require('../middlewares/jwt')
@@ -19,5 +20,7 @@ router.get('/', jwtValidator, getUserById)
 router.get('/', jwtValidator, getUsers)
 router.patch('/', jwtValidator, validator.body(updateUserSchema), updateUser)
 router.delete('/', jwtValidator, deleteUser)
+
+router.get('/role', jwtValidator, getUserRole)
 
 module.exports = router

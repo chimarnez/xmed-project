@@ -2,7 +2,7 @@ const User = require('../models/user')
 const Patient = require('../models/patient')
 const Doctor = require('../models/doctor')
 const { hash } = require('./security')
-const { Op } = require('sequelize');
+const { Op } = require('sequelize')
 
 exports.insert = async function (data) {
   data.password = await hash(data.password)
