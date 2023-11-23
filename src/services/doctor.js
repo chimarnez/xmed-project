@@ -60,6 +60,17 @@ exports.findById = function (id) {
   return Doctor.findByPk(id)
 }
 
+exports.findInfoById = function (id) {
+  return Doctor.findByPk(id, {
+    include: [
+      {
+        model: User,
+        attributes: ['firstName', 'lastName', 'phone', 'address', 'email']
+      }
+    ]
+  })
+}
+
 exports.insert = function (data) {
   return Doctor.create(data)
 }

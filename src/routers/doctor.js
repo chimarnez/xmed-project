@@ -6,7 +6,8 @@ const {
   createDoctor,
   updateDoctor,
   deleteDoctor,
-  getDoctors
+  getDoctors,
+  getDoctorInfo
 } = require('../controllers/doctor')
 const validator = require('../middlewares/validator')
 const {
@@ -16,6 +17,7 @@ const {
 const { withDoctor, withoutDoctor } = require('../middlewares/doctor')
 
 router.get('/search', withoutDoctor, getDoctors)
+
 router.get('/', withDoctor, getDoctor)
 router.post(
   '/',
@@ -25,5 +27,7 @@ router.post(
 )
 router.patch('/', withDoctor, validator.body(updateDoctorsSchema), updateDoctor)
 router.delete('/', withDoctor, deleteDoctor)
+// info routes
+router.get('/:id', getDoctorInfo)
 
 module.exports = router

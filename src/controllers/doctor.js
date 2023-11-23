@@ -1,6 +1,7 @@
 const {
   findAll,
   findById,
+  findInfoById,
   insert,
   update,
   deleteById,
@@ -25,6 +26,12 @@ exports.getDoctors = async function (req, res) {
 exports.getDoctor = async function (request, response) {
   const { id } = request.user.Doctor
   const doctor = await findById(id)
+  response.status(200).json(doctor)
+}
+
+exports.getDoctorInfo = async function (request, response) {
+  const { id } = request.params
+  const doctor = await findInfoById(id)
   response.status(200).json(doctor)
 }
 
