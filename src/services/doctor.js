@@ -4,13 +4,9 @@ const { Op } = require('sequelize')
 const Doctor = require('../models/doctor')
 const User = require('../models/user')
 
-exports.findAll = async function () {
-  const doctors = await Doctor.findAll({
+exports.findAll = function () {
+  return Doctor.findAll({
     include: [{ model: User, attributes: ['firstName', 'lastName', 'phone'] }]
-  })
-  return doctors.map((doctor) => {
-    const { User, ...rest } = doctor
-    return { ...User, ...rest }
   })
 }
 
