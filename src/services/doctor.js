@@ -5,8 +5,12 @@ const Doctor = require('../models/doctor')
 const User = require('../models/user')
 
 exports.findAll = function () {
-  return Doctor.findAll({
+  const doctors = Doctor.findAll({
     include: [{ model: User, attributes: ['firstName', 'lastName', 'phone'] }]
+  })
+  return doctors.map((doctor) => {
+    const { User, ...rest } = doctor
+    return { ...User, ...rest }
   })
 }
 
