@@ -1,4 +1,4 @@
-const { save, findById, updateById, deleteById, findByPatientId, findByDoctorId } = require('../services/record')
+const { save, findById, updateById, deleteById, findByPatientId, findByDoctorId, findInfoById } = require('../services/record')
 
 exports.createRecord = async function (req, res) {
   const { id: DoctorId } = req.user.Doctor
@@ -10,6 +10,12 @@ exports.createRecord = async function (req, res) {
 exports.getRecordById = async function (req, res) {
   const { id } = req.params
   const record = await findById(id)
+  return res.status(200).json(record)
+}
+
+exports.getRecordInfoById = async function (req, res) {
+  const { id } = req.params
+  const record = await findInfoById(id)
   return res.status(200).json(record)
 }
 

@@ -1,10 +1,12 @@
 const Record = require('../models/record')
+const User = require('../models/user')
+const Patient = require('../models/patient')
+const Doctor = require('../models/doctor')
 
 exports.save = async function (data) {
   return Record.create(data)
 }
 
-// returns all records for a patient
 exports.findByPatientId = async function (PatientId) {
   return Record.findAll({
     where: {
@@ -13,7 +15,46 @@ exports.findByPatientId = async function (PatientId) {
   })
 }
 
-// returns all records for a doctor
+exports.findInfoById = async function (id) {
+  const record = await Record.findByPk(id, {
+    include: [
+      {
+        model: Doctor,
+        include: [
+          {
+            model: User,
+            attributes: ['firstName', 'lastName']
+          }
+        ]
+      },
+      {
+        model: Patient,
+        include: [
+          {
+            model: User,
+            attributes: ['firstName', 'lastName']
+          }
+        ]
+      }
+    ]
+  })
+
+  if (record) {
+    return {
+      patientFirstName: record.Patient.User.firstName,
+      patientLastName: record.Patient.User.lastName,
+      diagnosis: record.diagnosis,
+      symptoms: record.symptoms,
+      treatment: record.treatment,
+      issuedOn: record.issuedOn,
+      doctorFirstName: record.Doctor.User.firstName,
+      doctorLastName: record.Doctor.User.lastName,
+    }
+  }
+
+  return null;
+}
+
 exports.findByDoctorId = async function (DoctorId) {
   return Record.findAll({
     where: {
@@ -22,7 +63,6 @@ exports.findByDoctorId = async function (DoctorId) {
   })
 }
 
-// returns a single record by id
 exports.findById = async function (id) {
   return Record.findOne({
     where: {

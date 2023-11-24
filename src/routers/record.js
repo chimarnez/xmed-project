@@ -13,6 +13,7 @@ const {
   createRecord,
   getRecordById,
   getRecordsByPatientId,
+  getRecordInfoById,
   deleteRecord,
   getRecordByDoctorId,
   getRecordsFromDoctorByPatientId
@@ -20,10 +21,11 @@ const {
 
 router.post('/', jwtValidatorDoctor, validator.body(createRecordSchema), createRecord)
 router.get('/patients', jwtValidatorPatient, getRecordsByPatientId)
-router.get('/patients/:id', jwtValidatorPatient, getRecordById)
+router.get('/patients/:id', jwtValidatorPatient, getRecordInfoById)
+//router.get('/patients/:id', jwtValidatorPatient, getRecordById)
 router.get('/doctors', jwtValidatorDoctor, getRecordByDoctorId)
 router.get('/doctors/patient/:id', jwtValidatorDoctor, getRecordsFromDoctorByPatientId)
-router.get('/doctors/:id', jwtValidatorDoctor, getRecordById)
+router.get('/doctors/:id', jwtValidatorDoctor, getRecordInfoById)
 router.delete('/:id', jwtValidator, deleteRecord)
 
 module.exports = router
