@@ -6,12 +6,10 @@ const {
   jwtValidatorDoctor,
   jwtValidatorPatient
 } = require('../middlewares/jwt')
-const {
-  createRecordSchema
-} = require('../validations/record')
+const { createRecordSchema } = require('../validations/record')
 const {
   createRecord,
-  getRecordById,
+  // getRecordById,
   getRecordsByPatientId,
   getRecordInfoById,
   deleteRecord,
@@ -19,12 +17,21 @@ const {
   getRecordsFromDoctorByPatientId
 } = require('../controllers/record')
 
-router.post('/', jwtValidatorDoctor, validator.body(createRecordSchema), createRecord)
+router.post(
+  '/',
+  jwtValidatorDoctor,
+  validator.body(createRecordSchema),
+  createRecord
+)
 router.get('/patients', jwtValidatorPatient, getRecordsByPatientId)
 router.get('/patients/:id', jwtValidatorPatient, getRecordInfoById)
-//router.get('/patients/:id', jwtValidatorPatient, getRecordById)
+// router.get('/patients/:id', jwtValidatorPatient, getRecordById)
 router.get('/doctors', jwtValidatorDoctor, getRecordByDoctorId)
-router.get('/doctors/patient/:id', jwtValidatorDoctor, getRecordsFromDoctorByPatientId)
+router.get(
+  '/doctors/patient/:id',
+  jwtValidatorDoctor,
+  getRecordsFromDoctorByPatientId
+)
 router.get('/doctors/:id', jwtValidatorDoctor, getRecordInfoById)
 router.delete('/:id', jwtValidator, deleteRecord)
 

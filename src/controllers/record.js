@@ -1,4 +1,12 @@
-const { save, findById, updateById, deleteById, findByPatientId, findByDoctorId, findInfoById } = require('../services/record')
+const {
+  save,
+  findById,
+  updateById,
+  deleteById,
+  findByPatientId,
+  findByDoctorId,
+  findInfoById
+} = require('../services/record')
 
 exports.createRecord = async function (req, res) {
   const { id: DoctorId } = req.user.Doctor
@@ -26,6 +34,9 @@ exports.getRecordsFromDoctorByPatientId = async function (req, res) {
 }
 
 exports.getRecordsByPatientId = async function (req, res) {
+  if (!req.user.Patient) {
+    return res.status(200).json({ records: [] })
+  }
   const { id: PatientId } = req.user.Patient
   const records = await findByPatientId(PatientId)
   return res.status(200).json(records)
