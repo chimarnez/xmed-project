@@ -6,7 +6,10 @@ const {
   jwtValidatorDoctor,
   jwtValidatorPatient
 } = require('../middlewares/jwt')
-const { createRecordSchema } = require('../validations/record')
+const {
+  createRecordSchema,
+  updateRecordSchema
+} = require('../validations/record')
 const {
   createRecord,
   // getRecordById,
@@ -14,7 +17,8 @@ const {
   getRecordInfoById,
   deleteRecord,
   getRecordByDoctorId,
-  getRecordsFromDoctorByPatientId
+  getRecordsFromDoctorByPatientId,
+  updateRecord
 } = require('../controllers/record')
 
 router.post(
@@ -33,6 +37,12 @@ router.get(
   getRecordsFromDoctorByPatientId
 )
 router.get('/doctors/:id', jwtValidatorDoctor, getRecordInfoById)
+router.patch(
+  '/:id',
+  jwtValidatorDoctor,
+  validator.body(updateRecordSchema),
+  updateRecord
+) // UNSAFE route
 router.delete('/:id', jwtValidator, deleteRecord)
 
 module.exports = router
