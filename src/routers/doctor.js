@@ -16,7 +16,8 @@ const {
 } = require('../validations/doctor')
 const { withDoctor, withoutDoctor } = require('../middlewares/doctor')
 
-router.get('/search', withoutDoctor, getDoctors)
+// router.get('/search', withoutDoctor, getDoctors)
+router.get('/search', getDoctors) // To be accessible for both doctors and patients
 
 router.get('/', withDoctor, getDoctor)
 router.post(
