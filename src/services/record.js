@@ -29,6 +29,7 @@ exports.findInfoById = async function (id) {
       },
       {
         model: Patient,
+        attributes: ['id'],
         include: [
           {
             model: User,
@@ -41,6 +42,7 @@ exports.findInfoById = async function (id) {
 
   if (record) {
     return {
+      PatientId: record.Patient.id,
       patientFirstName: record.Patient.User.firstName,
       patientLastName: record.Patient.User.lastName,
       diagnosis: record.diagnosis,
@@ -48,11 +50,11 @@ exports.findInfoById = async function (id) {
       treatment: record.treatment,
       issuedOn: record.issuedOn,
       doctorFirstName: record.Doctor.User.firstName,
-      doctorLastName: record.Doctor.User.lastName,
+      doctorLastName: record.Doctor.User.lastName
     }
   }
 
-  return null;
+  return null
 }
 
 exports.findByDoctorId = async function (DoctorId) {
