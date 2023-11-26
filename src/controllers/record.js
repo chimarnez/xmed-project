@@ -35,7 +35,7 @@ exports.getRecordsFromDoctorByPatientId = async function (req, res) {
 
 exports.getRecordsByPatientId = async function (req, res) {
   if (!req.user.Patient) {
-    return res.status(200).json({ records: [] })
+    return res.status(200).json([])
   }
   const { id: PatientId } = req.user.Patient
   const records = await findByPatientId(PatientId)
