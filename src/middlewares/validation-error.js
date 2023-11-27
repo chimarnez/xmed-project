@@ -7,7 +7,7 @@ function getErrors(details) {
 }
 
 module.exports = function (err, req, res, next) {
-  if (err && err.error.isJoi) {
+  if (err) {
     console.error(err)
     res.status(400).json(getErrors(err.error.details))
   } else {

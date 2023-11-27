@@ -18,6 +18,7 @@ const doctorRouter = require('./routers/doctor')
 const patientRouter = require('./routers/patient')
 const recordRouter = require('./routers/record')
 const authRouter = require('./routers/auth')
+const filesRouter = require('./routers/files')
 
 const validationError = require('./middlewares/validation-error')
 const resourceError = require('./middlewares/resource-error')
@@ -33,6 +34,7 @@ app.use('/patients', jwtValidatorPatient, patientRouter)
 app.use('/doctors', jwtValidatorDoctor, doctorRouter)
 app.use('/records', jwtValidator, recordRouter)
 app.use('/auth', authRouter)
+app.use('/files', filesRouter)
 
 // Error handler
 app.use(resourceError)
