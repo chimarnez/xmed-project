@@ -61,7 +61,9 @@ exports.findAll = function () {
 }
 
 exports.update = async function (id, data) {
-  data.password = await hash(data.password)
+  if (data.password) {
+    data.password = await hash(data.password)
+  }
   await User.update(data, { where: { id } })
 }
 
