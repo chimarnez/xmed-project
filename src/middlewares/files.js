@@ -23,14 +23,21 @@ const upload = multer(
     {    
     storage: multerS3({
       s3,
+      acl: 'public-read',
+      contentType: multerS3.AUTO_CONTENT_TYPE,
       region,
       bucket: bucketName,
       metadata: function (req, files, cb) {
         cb(null, {fieldName: files.originalname});
       },
       key: function (req, files, cb) {
-            const fileExtension = files.originalname.split('.').pop();
-            cb(null, Date.now().toString()+"."+fileExtension)
+        const fileExtension = files.originalname.split('.').pop();
+        const key = Date.now().toString() + '.' + fileExtension
+        cb(null, key)
+
+        const url = `https://${bucketName}.s3.${region}.amazonaws.com/${key}`
+        req.file = req.file || {}
+        req.file.url = url
       }
     })
   }
