@@ -52,5 +52,10 @@ module.exports = sequelize.define('User', {
   password: {
     type: DataTypes.STRING(100),
     allowNull: false
+  },
+  profilePicture: {
+    field: 'profile_picture',
+    type: DataTypes.STRING(100),
+    allowNull: true
   }
 })
