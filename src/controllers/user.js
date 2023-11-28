@@ -51,10 +51,7 @@ exports.getUserRole = async function (request, response) {
   const { id } = request.user
   const user = await findByIdWithDoctor(id)
 
-  response.status(200).json({
-    "message":'Successfully uploaded ',
-    "file": fileOriginalName
-  })
+  response.status(200).json(user)
 }
 
 // exports.createUser = async function (req, res) {
