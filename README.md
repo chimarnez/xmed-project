@@ -7,3 +7,4 @@ Proyecto BEDU
 - Daniel Jiménez
 - Yasser Rosas
 - Leonardo Cruz
+- Hugo Munguía
