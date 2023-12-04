@@ -30,7 +30,10 @@ const schema = Joi.object({
     .min(8)
     .max(100)
     .pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
-    .alter(optional)
+    .alter(optional),
+
+  profilePicture: Joi.string()
+    .allow(null)
 })
 
 exports.createUserSchema = schema.tailor('post')
