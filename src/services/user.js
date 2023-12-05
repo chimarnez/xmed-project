@@ -67,6 +67,11 @@ exports.update = async function (id, data) {
   await User.update(data, { where: { id } })
 }
 
+exports.uploadProfilePicture = async function (id, imageUrl) {
+  console.log(imageUrl)
+  await User.update({ profilePicture: imageUrl }, { where: { id } })
+}
+
 exports.deleteById = async function (id) {
   const patient = await User.findByPk(id)
   await patient.destroy()
