@@ -4,7 +4,8 @@ const {
   findById,
   findAll,
   deleteById,
-  findByIdWithDoctor
+  findByIdWithDoctor,
+  uploadProfilePicture
 } = require('../services/user')
 // const { insert: insertPatient } = require('../services/patient')
 
@@ -52,6 +53,14 @@ exports.getUserRole = async function (request, response) {
   const user = await findByIdWithDoctor(id)
 
   response.status(200).json(user)
+}
+
+exports.uploadUserProfilePicture = async function (request, response) {
+  const { id } = request.user
+  const imageUrl = request.file.location
+  console.log(request.file.location)
+  await uploadProfilePicture(id, imageUrl)
+  response.status(204).end()
 }
 
 // exports.createUser = async function (req, res) {
