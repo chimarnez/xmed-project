@@ -1,4 +1,5 @@
 require('dotenv').config()
+require('express-async-errors')
 const express = require('express')
 const cors = require('cors')
 const swaggerUi = require('swagger-ui-express')
@@ -20,8 +21,7 @@ const recordRouter = require('./routers/record')
 const authRouter = require('./routers/auth')
 const filesRouter = require('./routers/files')
 
-const validationError = require('./middlewares/validation-error')
-const resourceError = require('./middlewares/resource-error')
+const errorHandler = require('./middlewares/error-handler')
 const {
   jwtValidatorPatient,
   jwtValidatorDoctor,
@@ -37,8 +37,7 @@ app.use('/auth', authRouter)
 app.use('/files', filesRouter)
 
 // Error handler
-app.use(resourceError)
-app.use(validationError)
+app.use(errorHandler)
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log(`> Listening in port :${process.env.SERVER_PORT}`)

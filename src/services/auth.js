@@ -1,6 +1,6 @@
 const { findByEmail } = require('./user')
 const { compare, sign } = require('./security')
-const AuthException = require('../exceptions/auth')
+const { UnauthorizedError } = require('../exceptions')
 
 exports.authenticate = async (credentials) => {
   const { email, password } = credentials
@@ -8,13 +8,13 @@ exports.authenticate = async (credentials) => {
   const user = await findByEmail(email)
 
   if (!user) {
-    throw new AuthException('Invalid credentials')
+    throw new UnauthorizedError('Invalid credentials')
   }
 
   const isSame = await compare(password, user.password)
 
   if (!isSame) {
-    throw new AuthException('Invalid credentials')
+    throw new UnauthorizedError('Invalid credentials')
   }
 
   return sign({ id: user.id })

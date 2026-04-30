@@ -1,19 +1,11 @@
-const { ResourceError } = require('../exceptions/resource')
+const { NotFoundError, ConflictError } = require('../exceptions')
 
 exports.withPatient = async function (req, res, next) {
-  try {
-    if (!req.user.Patient) throw new ResourceError('Resource not available')
-    next()
-  } catch (error) {
-    next(error)
-  }
+  if (!req.user.Patient) throw new NotFoundError('Resource not available')
+  next()
 }
 
 exports.withoutPatient = async function (req, res, next) {
-  try {
-    if (req.user.Patient) throw new ResourceError('Patient already exist', 407)
-    next()
-  } catch (error) {
-    next(error)
-  }
+  if (req.user.Patient) throw new ConflictError('Patient already exists')
+  next()
 }
